@@ -1,5 +1,6 @@
 ﻿using DataLayer.Models;
 using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace DataLayer.ConsoleDataAccess
@@ -10,11 +11,9 @@ namespace DataLayer.ConsoleDataAccess
         {
         }
 
-        public override void Add(Recipe item)
+        protected override XElement ConvertToXml(Recipe item)
         {
-            var xdoc = XDocument.Load(_xmlFileLocation);
-            var rootElement = xdoc.Element(_rootElementName);
-            rootElement.Add(new XElement("user",
+            return new XElement("recipe",
                 new XAttribute("id", item.Id),
                 new XAttribute("name", item.Name),
                 new XAttribute("content", item.Content),
@@ -22,23 +21,23 @@ namespace DataLayer.ConsoleDataAccess
                 new XAttribute("creationDate", item.CreationDate.ToString()),
                 new XAttribute("editDate", item.EditDate.ToString()),
                 new XAttribute("deleteDate", item.DeleteDate.ToString()),
-                new XAttribute("status", item.RecipeStatus.RecipeStatusName)));
-            xdoc.Save(_xmlFileLocation);
+                new XAttribute("status", item.RecipeStatus.RecipeStatusName));
         }
 
-        public override void Delete(Func<Recipe, bool> predicate)
+        protected override Recipe CreateFromXml(XElement element)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Recipe Get(Func<Recipe, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Update(Recipe item, Func<Recipe, bool> predicate)
-        {
-            throw new NotImplementedException();
+            var recipe = new Recipe
+            {
+                Id = element.Attribute("id").Value,
+                Name = element.Attribute("name").Value,
+                Content = element.Attribute("content").Value,
+                Description = element.Attribute("description").Value,
+                CreationDate = DateTime.Parse(element.Attribute("creationDate").Value),
+                EditDate = DateTime.Parse(element.Attribute("editDate").Value),
+                DeleteDate = DateTime.Parse(element.Attribute("deleteDate").Value),
+                RecipeStatus = new RecipeStatus { RecipeStatusName = element.Attribute("status").Value }
+            };
+            return recipe;
         }
     }
 }

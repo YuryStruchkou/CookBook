@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using DataLayer.Models;
 
@@ -10,37 +11,41 @@ namespace DataLayer.ConsoleDataAccess
         {
         }
 
-        public override void Add(User item)
+        protected override XElement ConvertToXml(User item)
         {
-            var xdoc = XDocument.Load(_xmlFileLocation);
-            var rootElement = xdoc.Element(_rootElementName);
-            rootElement.Add(new XElement("user",
+            return new XElement("user",
                 new XAttribute("id", item.Id),
                 new XAttribute("username", item.Username),
                 new XAttribute("email", item.Email),
                 new XAttribute("passwordHash", item.PasswordHash),
                 new XAttribute("creationDate", item.CreationDate.ToString()),
                 new XAttribute("role", item.Role.RoleName),
-                new XElement("profile", 
+                new XElement("profile",
                     new XAttribute("avatar", item.UserProfile.Avatar),
                     new XAttribute("muted", item.UserProfile.IsMuted.ToString()),
-                    new XAttribute("status", item.UserProfile.UserStatus.StatusName))));
-            xdoc.Save(_xmlFileLocation);
+                    new XAttribute("status", item.UserProfile.UserStatus.StatusName)));
         }
 
-        public override void Delete(Func<User, bool> predicate)
+        protected override User CreateFromXml(XElement element)
         {
-            throw new NotImplementedException();
-        }
-
-        public override User Get(Func<User, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Update(User item, Func<User, bool> predicate)
-        {
-            throw new NotImplementedException();
+            var profileElement = element.Element("profile");
+            var user = new User
+            {
+                Id = element.Attribute("id").Value,
+                Username = element.Attribute("username").Value,
+                Email = element.Attribute("email").Value,
+                PasswordHash = element.Attribute("passwordHash").Value,
+                CreationDate = DateTime.Parse(element.Attribute("creationDate").Value),
+                Role = new Role { RoleName = element.Attribute("role").Value },
+                UserProfile = new UserProfile
+                {
+                    UserId = element.Attribute("id").Value,
+                    Avatar = profileElement.Attribute("avatar").Value,
+                    IsMuted = Boolean.Parse(profileElement.Attribute("muted").Value),
+                    UserStatus = new UserStatus { StatusName = profileElement.Attribute("status").Value }
+                }
+            };
+            return user;
         }
     }
 }
