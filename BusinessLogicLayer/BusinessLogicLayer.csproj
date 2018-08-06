@@ -13,10 +13,8 @@
     <Folder Include="CommentManagement\" />
     <Folder Include="AdministrativeLogic\" />
     <Folder Include="VoteManagement\" />
-    <Folder Include="RecipeManagement\" />
     <Folder Include="TagManagement\" />
     <Folder Include="SearchManagement\" />
-    <Folder Include="UserManagement\" />
   </ItemGroup>
 
 </Project>

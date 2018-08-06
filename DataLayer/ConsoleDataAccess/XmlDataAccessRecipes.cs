@@ -1,4 +1,5 @@
-﻿using DataLayer.Models;
+﻿using DataLayer.DataConstants;
+using DataLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -7,7 +8,7 @@ namespace DataLayer.ConsoleDataAccess
 {
     public class XmlDataAccessRecipes : XmlDataAccess<Recipe>
     {
-        public XmlDataAccessRecipes(string xmlFileLocation, string rootElementName) : base(xmlFileLocation, rootElementName)
+        public XmlDataAccessRecipes() : base(XMLConstants.DEFAULT_RECIPES_XML, XMLConstants.RECIPES)
         {
         }
 

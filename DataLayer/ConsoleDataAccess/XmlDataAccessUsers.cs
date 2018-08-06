@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using DataLayer.DataConstants;
 using DataLayer.Models;
 
 namespace DataLayer.ConsoleDataAccess
 {
     public class XmlDataAccessUsers : XmlDataAccess<User>
     {
-        public XmlDataAccessUsers(string xmlFileLocation, string rootElementName) : base(xmlFileLocation, rootElementName)
+        public XmlDataAccessUsers() : base(XMLConstants.DEFAULT_USERS_XML, XMLConstants.USERS)
         {
         }
 
