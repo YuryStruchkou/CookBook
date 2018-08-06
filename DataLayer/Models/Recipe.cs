@@ -18,6 +18,6 @@ namespace DataLayer.Models
 
         public DateTime DeleteDate { get; set; }
 
-        public string RecipeStatusName { get; set; }
+        public RecipeStatus RecipeStatus { get; set; }
     }
 }

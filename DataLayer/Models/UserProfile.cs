@@ -7,5 +7,7 @@
         public string Avatar { get; set; }
 
         public bool IsMuted { get; set; }
+
+        public UserStatus UserStatus { get; set; }
     }
 }
