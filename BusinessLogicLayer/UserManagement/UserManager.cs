@@ -9,6 +9,11 @@ namespace BusinessLogicLayer.UserManagement
     {
         private XmlDataAccessUsers xmlDataAccess;
 
+        public UserManager()
+        {
+            xmlDataAccess = new XmlDataAccessUsers();
+        }
+
         public UserManager(XmlDataAccessUsers _xmlDataAccess)
         {
             xmlDataAccess = _xmlDataAccess;

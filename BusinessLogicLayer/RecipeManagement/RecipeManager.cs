@@ -9,6 +9,11 @@ namespace BusinessLogicLayer.RecipeManagement
     {
         private XmlDataAccessRecipes xmlDataAccess;
 
+        public RecipeManager()
+        {
+            xmlDataAccess = new XmlDataAccessRecipes();
+        }
+
         public RecipeManager(XmlDataAccessRecipes _xmlDataAccess)
         {
             xmlDataAccess = _xmlDataAccess;

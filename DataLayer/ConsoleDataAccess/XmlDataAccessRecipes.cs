@@ -20,9 +20,10 @@ namespace DataLayer.ConsoleDataAccess
                 new XAttribute("content", item.Content),
                 new XAttribute("description", item.Description),
                 new XAttribute("creationDate", item.CreationDate.ToString()),
-                new XAttribute("editDate", item.EditDate.ToString()),
-                new XAttribute("deleteDate", item.DeleteDate.ToString()),
-                new XAttribute("status", item.RecipeStatus.RecipeStatusName));
+                new XAttribute("editDate", item.EditDate?.ToString() ?? ""),
+                new XAttribute("deleteDate", item.DeleteDate?.ToString() ?? ""),
+                new XAttribute("status", item.RecipeStatus.RecipeStatusName),
+                new XAttribute("userId", item.UserId));
         }
 
         protected override Recipe CreateFromXml(XElement element)
@@ -34,9 +35,10 @@ namespace DataLayer.ConsoleDataAccess
                 Content = element.Attribute("content").Value,
                 Description = element.Attribute("description").Value,
                 CreationDate = DateTime.Parse(element.Attribute("creationDate").Value),
-                EditDate = DateTime.Parse(element.Attribute("editDate").Value),
-                DeleteDate = DateTime.Parse(element.Attribute("deleteDate").Value),
-                RecipeStatus = new RecipeStatus { RecipeStatusName = element.Attribute("status").Value }
+                EditDate = !string.IsNullOrEmpty(element.Attribute("editDate").Value) ? (DateTime?)DateTime.Parse(element.Attribute("editDate").Value) : null,
+                DeleteDate = !string.IsNullOrEmpty(element.Attribute("deleteDate").Value) ? (DateTime?)DateTime.Parse(element.Attribute("deleteDate").Value) : null,
+                RecipeStatus = new RecipeStatus { RecipeStatusName = element.Attribute("status").Value },
+                UserId = element.Attribute("userId").Value
             };
             return recipe;
         }
