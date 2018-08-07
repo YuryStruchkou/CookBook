@@ -1,6 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using BusinessLogicLayer.RecipeManagement;
 using BusinessLogicLayer.UserManagement;
+using CoreProject;
+using CoreProject.DataConstants;
 using DomainLayer.Models;
 
 namespace ConsolePresentationLayer
@@ -82,37 +86,47 @@ namespace ConsolePresentationLayer
 
         static void Main(string[] args)
         {
-            //var userManager = new UserManager();
-            //var recipeManager = new RecipeManager();
-            //userManager.AddUser(User1);
-            //userManager.AddUser(User2);
-            //recipeManager.AddRecipe(Recipe1);
-            //recipeManager.AddRecipe(Recipe2);
-            //recipeManager.AddRecipe(Recipe3);
+            var userManager = new UserManager();
+            var recipeManager = new RecipeManager();
+            userManager.AddUser(User1);
+            userManager.AddUser(User2);
+            recipeManager.AddRecipe(Recipe1);
+            recipeManager.AddRecipe(Recipe2);
+            recipeManager.AddRecipe(Recipe3);
 
-            //User1.Email = "user1@gmail.com";
-            //Recipe2.Description = "Blah-blah-blah";
-            //userManager.UpdateUser(User1, u => u.Id == 1);
-            //recipeManager.UpdateRecipe(Recipe2, r => r.Id == 2);
+            User1.Email = "user1@gmail.com";
+            Recipe2.Description = "Blah-blah-blah";
+            userManager.UpdateUser(User1, u => u.Id == 1);
+            recipeManager.UpdateRecipe(Recipe2, r => r.Id == 2);
 
-            //Console.WriteLine($"Users: {userManager.GetAll().Count} Recipes: {recipeManager.GetAll().Count}");
+            Console.WriteLine($"Users: {userManager.GetAll().Count} Recipes: {recipeManager.GetAll().Count}");
 
-            //foreach (var user in userManager.Get(u => u.Id == 1))
-            //{
-            //    Console.WriteLine($"Username: {user.Username}");
-            //    foreach(var recipe in recipeManager.Get(r => r.UserId == user.Id))
-            //    {
-            //        Console.WriteLine($"\tRecipe: {recipe.Name}");
-            //    }
-            //}
+            foreach (var user in userManager.Get(u => u.Id == 1))
+            {
+                Console.WriteLine($"Username: {user.Username}");
+                foreach (var recipe in recipeManager.Get(r => r.UserId == user.Id))
+                {
+                    Console.WriteLine($"\tRecipe: {recipe.Name}");
+                }
+            }
 
-            //userManager.DeleteUser(u => u.Id == 2);
-            //recipeManager.DeleteRecipe(r => r.Id == 3);
+            userManager.DeleteUser(u => u.Id == 2);
+            recipeManager.DeleteRecipe(r => r.Id == 3);
 
-            //Console.WriteLine($"Users: {userManager.GetUserCount()} Recipes: {recipeManager.GetRecipeCount()}");
+            Console.WriteLine($"Users: {userManager.GetUserCount()} Recipes: {recipeManager.GetRecipeCount()}");
 
-            //userManager.DeleteUser(u => true);
-            //recipeManager.DeleteRecipe(r => true);
+            userManager.DeleteUser(u => true);
+            recipeManager.DeleteRecipe(r => true);
+
+
+
+            //Console.WriteLine(XmlSerializationHelper<User>.Deserialize(XmlConstants.DefaultUsersXml)?.UserProfile?.UserStatus);
+            //XmlSerializationHelper<User>.Serialize(XmlConstants.DefaultUsersXml, User1);
+            //Console.WriteLine(XmlSerializationHelper<User>.Deserialize(XmlConstants.DefaultUsersXml).UserProfile.UserStatus);
+            //XmlSerializationHelper<Recipe>.Serialize(XmlConstants.DefaultRecipesXml, Recipe2);
+            //Console.WriteLine(XmlSerializationHelper<Recipe>.Deserialize(XmlConstants.DefaultRecipesXml).RecipeStatus);
         }
     }
 }
+// XmlConstants.DefaultUsersXml
+//XmlConstants.DefaultRecipesXml

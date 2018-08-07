@@ -1,76 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
-using System.Xml.Serialization;
+using DomainLayer.XmlContext;
 
 namespace DataLayer.ConsoleDataAccess
 {
-    public abstract class XmlDataAccess<T>
+    public abstract class XmlDataAccess<T> : IXmlDataAccess<T>
     {
-        protected readonly string _xmlFileLocation;
-        protected readonly XmlSerializer _serializer = new XmlSerializer(typeof(T));
-        protected readonly XDocument _xDoc;
-        protected string _rootElementName;
+        protected XmlContext XmlContext = new XmlContext();
 
-        
-        public XmlDataAccess (string xmlFileLocation, string rootElementName)
+        protected abstract List<T> XmlList { get; }
+
+        public virtual void Add(T item)
         {
-            _xmlFileLocation = xmlFileLocation;
-            _rootElementName = rootElementName;
-            _xDoc = XDocument.Load(xmlFileLocation);
+            XmlList.Add(item);
+            XmlContext.Save();
         }
 
-        public void Add(T item)
+        public virtual void Update(T item, Func<T, bool> predicate)
         {
-            var rootElement = _xDoc.Element(_rootElementName);
-            rootElement.Add(ConvertToXml(item));
-            _xDoc.Save(_xmlFileLocation);
-        }
-
-        public void Update(T item, Func<T, bool> predicate)
-        {
-            var rootElement = _xDoc.Element(_rootElementName);
-            foreach (var elem in rootElement.Elements().ToList())
+            for (int i = 0; i < XmlList.Count; i++)
             {
-                if (predicate(CreateFromXml(elem)))
+                if (predicate(XmlList[i]))
                 {
-                    rootElement.Add(ConvertToXml(item));
-                    elem.Remove();
+                    XmlList[i] = item;
                 }
             }
-            _xDoc.Save(_xmlFileLocation);
+            XmlContext.Save();
         }
 
-        public void Delete(Func<T, bool> predicate)
+        public virtual void Delete(Func<T, bool> predicate)
         {
-            var rootElement = _xDoc.Element(_rootElementName);
-            foreach (var elem in rootElement.Elements().ToList())
+            for (int i = 0; i < XmlList.Count; )
             {
-                if (predicate(CreateFromXml(elem)))
+                if (predicate(XmlList[i]))
                 {
-                    elem.Remove();
+                    XmlList.RemoveAt(i);
+                }
+                else
+                {
+                    i++;
                 }
             }
-            _xDoc.Save(_xmlFileLocation);
+            XmlContext.Save();
         }
 
-        public List<T> Get(Func<T, bool> predicate)
+        public virtual List<T> Get(Func<T, bool> predicate)
         {
-            var rootElement = _xDoc.Element(_rootElementName);
-            return rootElement.Elements()
-                .Select(el => CreateFromXml(el))
-                .Where(item => predicate(item))
-                .ToList();
+            return XmlList.Where(item => predicate(item)).ToList();
         }
 
-        public List<T> GetAll()
+        public virtual List<T> GetAll()
         {
-            return Get(item => true);
+            return XmlList.ToList();
         }
-
-        protected abstract T CreateFromXml(XElement element);
-
-        protected abstract XElement ConvertToXml(T item);
     }
 }
