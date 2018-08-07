@@ -1,11 +1,7 @@
 ﻿using System;
-using System.IO;
-using System.Xml.Serialization;
 using BusinessLogicLayer.RecipeManagement;
 using BusinessLogicLayer.UserManagement;
 using BusinessLogicLayer.VoteManagement;
-using CoreProject;
-using CoreProject.DataConstants;
 using DomainLayer.Models;
 
 namespace ConsolePresentationLayer
@@ -101,7 +97,6 @@ namespace ConsolePresentationLayer
 
         static void Main(string[] args)
         {
-
             var userManager = new UserManager();
             var recipeManager = new RecipeManager();
             var voteManager = new VoteManager();
@@ -122,7 +117,7 @@ namespace ConsolePresentationLayer
                 var username = Console.ReadLine();
                 user = userManager.GetUserByUsername(username);
                 if (user == null)
-                    Console.WriteLine("No such user found.");
+                    Console.WriteLine("No such user was found.");
                 else
                     break;
             }
@@ -132,7 +127,7 @@ namespace ConsolePresentationLayer
                 var recipeName = Console.ReadLine();
                 recipe = userManager.GetRecipeByName(user.Id, recipeName);
                 if (recipe == null)
-                    Console.WriteLine("No such recipe found.");
+                    Console.WriteLine("No such recipe was found.");
                 else
                     break;
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CoreProject.LoggingHelpers;
 using DomainLayer.XmlContext;
 
 namespace DataLayer.ConsoleDataAccess
@@ -13,20 +14,28 @@ namespace DataLayer.ConsoleDataAccess
 
         public void Add(T item)
         {
-            XmlList.Add(item);
-            XmlContext.Save();
+            if (item != null)
+            {
+                XmlList.Add(item);
+                XmlContext.Save();
+                LoggingHelper.log.Info($"Object of type {typeof(T)} has been added.");
+            }
         }
 
         public void Update(T item, Func<T, bool> predicate)
         {
-            for (int i = 0; i < XmlList.Count; i++)
+            if (item != null)
             {
-                if (predicate(XmlList[i]))
+                for (int i = 0; i < XmlList.Count; i++)
                 {
-                    XmlList[i] = item;
+                    if (predicate(XmlList[i]))
+                    {
+                        XmlList[i] = item;
+                    }
                 }
+                XmlContext.Save();
+                LoggingHelper.log.Info($"Objects of type {typeof(T)} has been updated.");
             }
-            XmlContext.Save();
         }
 
         public void Delete(Func<T, bool> predicate)
@@ -43,15 +52,18 @@ namespace DataLayer.ConsoleDataAccess
                 }
             }
             XmlContext.Save();
+            LoggingHelper.log.Info($"Objects of type {typeof(T)} has been deleted.");
         }
 
         public List<T> Get(Func<T, bool> predicate)
         {
+            LoggingHelper.log.Info($"Objects of type {typeof(T)} has been queried.");
             return XmlList.Where(item => predicate(item)).ToList();
         }
 
         public List<T> GetAll()
         {
+            LoggingHelper.log.Info($"Objects of type {typeof(T)} has been queried.");
             return XmlList.ToList();
         }
     }
