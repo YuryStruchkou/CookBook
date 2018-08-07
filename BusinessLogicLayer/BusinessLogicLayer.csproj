@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CoreProject\CoreProject.csproj" />
     <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
     <ProjectReference Include="..\DomainLayer\DomainLayer.csproj" />
   </ItemGroup>
@@ -16,6 +17,10 @@
     <Folder Include="VoteManagement\" />
     <Folder Include="TagManagement\" />
     <Folder Include="SearchManagement\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ namespace DomainLayer.Models
 {
     public class Recipe
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -20,6 +20,6 @@ namespace DomainLayer.Models
 
         public RecipeStatus RecipeStatus { get; set; }
 
-        public string UserId { get; set; } 
+        public int UserId { get; set; } 
     }
 }

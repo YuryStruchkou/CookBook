@@ -16,7 +16,7 @@ namespace BusinessLogicLayer.RecipeManagement
 
         public RecipeManager(XmlDataAccessRecipes xmlDataAccess)
         {
-            _xmlDataAccess = _xmlDataAccess;
+            _xmlDataAccess = xmlDataAccess;
         }
 
         public void AddRecipe(Recipe item)

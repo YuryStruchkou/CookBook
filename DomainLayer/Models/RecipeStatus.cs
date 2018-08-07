@@ -1,7 +1,8 @@
 ﻿namespace DomainLayer.Models
 {
-    public class RecipeStatus
+    public enum RecipeStatus
     {
-        public string RecipeStatusName { get; set; }
+        Active = 1,
+        Deleted
     }
 }

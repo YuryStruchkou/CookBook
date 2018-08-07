@@ -1,0 +1,6 @@
+﻿namespace CoreProject
+{
+    class XmlSerializer
+    {
+    }
+}

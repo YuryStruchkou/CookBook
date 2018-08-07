@@ -1,7 +1,10 @@
 ﻿namespace DomainLayer.Models
 {
-    public class UserStatus
+    public enum UserStatus
     {
-        public string StatusName { get; set; }
+        Active = 1,
+        Pending,
+        Blocked,
+        Deleted
     }
 }
