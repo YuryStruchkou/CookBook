@@ -1,7 +1,8 @@
 ﻿namespace DomainLayer.Models
 {
-    public class Role
+    public enum Role
     {
-        public string RoleName { get; set; }
+        Admin = 1,
+        User
     }
 }

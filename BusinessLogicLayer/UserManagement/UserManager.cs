@@ -1,52 +1,66 @@
 ﻿using DataLayer.ConsoleDataAccess;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DomainLayer.Models;
 
 namespace BusinessLogicLayer.UserManagement
 {
     public class UserManager
     {
-        private readonly XmlDataAccessUsers _xmlDataAccess;
+        private readonly IXmlDataAccess<User> _xmlDataAccessUsers;
+        private readonly IXmlDataAccess<Recipe> _xmlDataAccessRecipes;
 
         public UserManager()
         {
-            _xmlDataAccess = new XmlDataAccessUsers();
+            _xmlDataAccessRecipes = new XmlDataAccessRecipes();
+            _xmlDataAccessUsers = new XmlDataAccessUsers();
         }
 
-        public UserManager(XmlDataAccessUsers xmlDataAccess)
+        public UserManager(IXmlDataAccess<User> xmlDataAccessUsers, IXmlDataAccess<Recipe> xmlDataAccessRecipes)
         {
-            _xmlDataAccess = xmlDataAccess;
+            _xmlDataAccessUsers = xmlDataAccessUsers;
+            _xmlDataAccessRecipes = xmlDataAccessRecipes;
         }
 
         public void AddUser(User item)
         {
-            _xmlDataAccess.Add(item);
+            _xmlDataAccessUsers.Add(item);
         }
 
         public void UpdateUser(User item, Func<User, bool> predicate)
         {
-            _xmlDataAccess.Update(item, predicate);
+            _xmlDataAccessUsers.Update(item, predicate);
         }
 
         public void DeleteUser(Func<User, bool> predicate)
         {
-            _xmlDataAccess.Delete(predicate);
+            _xmlDataAccessUsers.Delete(predicate);
         }
 
         public List<User> Get(Func<User, bool> predicate)
         {
-            return _xmlDataAccess.Get(predicate);
+            return _xmlDataAccessUsers.Get(predicate);
         }
 
         public List<User> GetAll()
         {
-            return _xmlDataAccess.GetAll();
+            return _xmlDataAccessUsers.GetAll();
+        }
+
+        public List<Recipe> GetRecipesOfUser(int userId)
+        {
+            return _xmlDataAccessRecipes.Get(r => r.UserId == userId);
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            return _xmlDataAccessUsers.Get(u => u.Username == username).FirstOrDefault();
         }
 
         public int GetUserCount()
         {
-            return _xmlDataAccess.GetAll().Count;
+            return _xmlDataAccessUsers.GetAll().Count;
         }
     }
 }

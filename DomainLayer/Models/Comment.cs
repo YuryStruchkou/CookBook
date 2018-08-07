@@ -10,7 +10,7 @@ namespace DomainLayer.Models
 
         public DateTime CreationDate { get; set; }
 
-        public DateTime EditDate { get; set; }
+        public DateTime? EditDate { get; set; }
 
         public string UserId { get; set; }
 

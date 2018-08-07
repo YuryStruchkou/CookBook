@@ -1,52 +1,62 @@
 ﻿using DataLayer.ConsoleDataAccess;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DomainLayer.Models;
 
 namespace BusinessLogicLayer.RecipeManagement
 {
     public class RecipeManager
     {
-        private readonly XmlDataAccessRecipes _xmlDataAccess;
+        private readonly IXmlDataAccess<Recipe> _xmlDataAccessRecipes;
+
+        private readonly IXmlDataAccess<Vote> _xmlDataAccessVotes;
 
         public RecipeManager()
         {
-            _xmlDataAccess = new XmlDataAccessRecipes();
+            _xmlDataAccessVotes = new XmlDataAccessVotes();
+            _xmlDataAccessRecipes = new XmlDataAccessRecipes();
         }
 
-        public RecipeManager(XmlDataAccessRecipes xmlDataAccess)
+        public RecipeManager(IXmlDataAccess<Recipe> xmlDataAccessRecipes, IXmlDataAccess<Vote> xmlDataAccessVotes)
         {
-            _xmlDataAccess = xmlDataAccess;
+            _xmlDataAccessRecipes = xmlDataAccessRecipes;
+            _xmlDataAccessVotes = xmlDataAccessVotes;
         }
 
         public void AddRecipe(Recipe item)
         {
-            _xmlDataAccess.Add(item);
+            _xmlDataAccessRecipes.Add(item);
         }
 
         public void UpdateRecipe(Recipe item, Func<Recipe, bool> predicate)
         {
-            _xmlDataAccess.Update(item, predicate);
+            _xmlDataAccessRecipes.Update(item, predicate);
         }
 
         public void DeleteRecipe(Func<Recipe, bool> predicate)
         {
-            _xmlDataAccess.Delete(predicate);
+            _xmlDataAccessRecipes.Delete(predicate);
         }
 
         public List<Recipe> Get(Func<Recipe, bool> predicate)
         {
-            return _xmlDataAccess.Get(predicate);
+            return _xmlDataAccessRecipes.Get(predicate);
         }
 
         public List<Recipe> GetAll()
         {
-            return _xmlDataAccess.GetAll();
+            return _xmlDataAccessRecipes.GetAll();
+        }
+
+        public double GetAverageVote(int recipeId)
+        {
+            return _xmlDataAccessVotes.Get(v => v.RecipeId == recipeId).Average(v => v.Value);
         }
 
         public int GetRecipeCount()
         {
-            return _xmlDataAccess.GetAll().Count;
+            return _xmlDataAccessRecipes.GetAll().Count;
         }
     }
 }

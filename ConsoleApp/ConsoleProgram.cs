@@ -18,7 +18,7 @@ namespace ConsolePresentationLayer
             Email = "user1@example.com",
             PasswordHash = "yfhrhr838319-sdkkie92-sdew2",
             CreationDate = new DateTime(2018, 8, 1),
-            Role = new Role { RoleName = "User" },
+            Role = Role.User,
             UserProfile = new UserProfile
             {
                 UserId = 1,
@@ -35,7 +35,7 @@ namespace ConsolePresentationLayer
             Email = "user2@example.com",
             PasswordHash = "yfhrhr838319-sdkkie92-sdew2",
             CreationDate = new DateTime(2018, 8, 1),
-            Role = new Role { RoleName = "Admin" },
+            Role = Role.Admin,
             UserProfile = new UserProfile
             {
                 UserId = 2,

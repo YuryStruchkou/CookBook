@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DataLayer.ConsoleDataAccess
 {
-    interface IXmlDataAccess<T>
+    public interface IXmlDataAccess<T>
     {
         void Add(T item);
 
