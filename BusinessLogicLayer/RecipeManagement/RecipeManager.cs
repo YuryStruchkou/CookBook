@@ -51,7 +51,8 @@ namespace BusinessLogicLayer.RecipeManagement
 
         public double GetAverageVote(int recipeId)
         {
-            return _xmlDataAccessVotes.Get(v => v.RecipeId == recipeId).Average(v => v.Value);
+            var votes = _xmlDataAccessVotes.Get(v => v.RecipeId == recipeId);
+            return votes.Count == 0 ? 0.0 : votes.Average(v => v.Value);
         }
 
         public int GetRecipeCount()

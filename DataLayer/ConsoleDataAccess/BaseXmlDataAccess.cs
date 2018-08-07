@@ -5,19 +5,19 @@ using DomainLayer.XmlContext;
 
 namespace DataLayer.ConsoleDataAccess
 {
-    public abstract class XmlDataAccess<T> : IXmlDataAccess<T>
+    public abstract class BaseXmlDataAccess<T> : IXmlDataAccess<T>
     {
-        protected XmlContext XmlContext = new XmlContext();
+        protected XmlContext XmlContext = XmlContext.GetInstance();
 
         protected abstract List<T> XmlList { get; }
 
-        public virtual void Add(T item)
+        public void Add(T item)
         {
             XmlList.Add(item);
             XmlContext.Save();
         }
 
-        public virtual void Update(T item, Func<T, bool> predicate)
+        public void Update(T item, Func<T, bool> predicate)
         {
             for (int i = 0; i < XmlList.Count; i++)
             {
@@ -29,7 +29,7 @@ namespace DataLayer.ConsoleDataAccess
             XmlContext.Save();
         }
 
-        public virtual void Delete(Func<T, bool> predicate)
+        public void Delete(Func<T, bool> predicate)
         {
             for (int i = 0; i < XmlList.Count; )
             {
@@ -45,12 +45,12 @@ namespace DataLayer.ConsoleDataAccess
             XmlContext.Save();
         }
 
-        public virtual List<T> Get(Func<T, bool> predicate)
+        public List<T> Get(Func<T, bool> predicate)
         {
             return XmlList.Where(item => predicate(item)).ToList();
         }
 
-        public virtual List<T> GetAll()
+        public List<T> GetAll()
         {
             return XmlList.ToList();
         }

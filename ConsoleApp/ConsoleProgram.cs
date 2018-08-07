@@ -3,6 +3,7 @@ using System.IO;
 using System.Xml.Serialization;
 using BusinessLogicLayer.RecipeManagement;
 using BusinessLogicLayer.UserManagement;
+using BusinessLogicLayer.VoteManagement;
 using CoreProject;
 using CoreProject.DataConstants;
 using DomainLayer.Models;
@@ -84,49 +85,62 @@ namespace ConsolePresentationLayer
             UserId = 2
         };
 
+        private static readonly Vote Vote1 = new Vote
+        {
+            RecipeId = 1,
+            UserId = 1,
+            Value = 5
+        };
+
+        private static readonly Vote Vote2 = new Vote
+        {
+            RecipeId = 1,
+            UserId = 2,
+            Value = 2
+        };
+
         static void Main(string[] args)
         {
+
             var userManager = new UserManager();
             var recipeManager = new RecipeManager();
+            var voteManager = new VoteManager();
+
             userManager.AddUser(User1);
             userManager.AddUser(User2);
             recipeManager.AddRecipe(Recipe1);
             recipeManager.AddRecipe(Recipe2);
             recipeManager.AddRecipe(Recipe3);
+            voteManager.AddVote(Vote1);
+            voteManager.AddVote(Vote2);
 
-            User1.Email = "user1@gmail.com";
-            Recipe2.Description = "Blah-blah-blah";
-            userManager.UpdateUser(User1, u => u.Id == 1);
-            recipeManager.UpdateRecipe(Recipe2, r => r.Id == 2);
-
-            Console.WriteLine($"Users: {userManager.GetAll().Count} Recipes: {recipeManager.GetAll().Count}");
-
-            foreach (var user in userManager.Get(u => u.Id == 1))
+            User user;
+            Recipe recipe;
+            while (true)
             {
-                Console.WriteLine($"Username: {user.Username}");
-                foreach (var recipe in recipeManager.Get(r => r.UserId == user.Id))
-                {
-                    Console.WriteLine($"\tRecipe: {recipe.Name}");
-                }
+                Console.WriteLine("Enter user name: ");
+                var username = Console.ReadLine();
+                user = userManager.GetUserByUsername(username);
+                if (user == null)
+                    Console.WriteLine("No such user found.");
+                else
+                    break;
             }
-
-            userManager.DeleteUser(u => u.Id == 2);
-            recipeManager.DeleteRecipe(r => r.Id == 3);
-
-            Console.WriteLine($"Users: {userManager.GetUserCount()} Recipes: {recipeManager.GetRecipeCount()}");
+            while (true)
+            {
+                Console.WriteLine("Enter recipe name: ");
+                var recipeName = Console.ReadLine();
+                recipe = userManager.GetRecipeByName(user.Id, recipeName);
+                if (recipe == null)
+                    Console.WriteLine("No such recipe found.");
+                else
+                    break;
+            }
+            Console.WriteLine($"Average grade is {recipeManager.GetAverageVote(recipe.Id)}");
 
             userManager.DeleteUser(u => true);
             recipeManager.DeleteRecipe(r => true);
-
-
-
-            //Console.WriteLine(XmlSerializationHelper<User>.Deserialize(XmlConstants.DefaultUsersXml)?.UserProfile?.UserStatus);
-            //XmlSerializationHelper<User>.Serialize(XmlConstants.DefaultUsersXml, User1);
-            //Console.WriteLine(XmlSerializationHelper<User>.Deserialize(XmlConstants.DefaultUsersXml).UserProfile.UserStatus);
-            //XmlSerializationHelper<Recipe>.Serialize(XmlConstants.DefaultRecipesXml, Recipe2);
-            //Console.WriteLine(XmlSerializationHelper<Recipe>.Deserialize(XmlConstants.DefaultRecipesXml).RecipeStatus);
+            voteManager.DeleteVote(v => true);
         }
     }
 }
-// XmlConstants.DefaultUsersXml
-//XmlConstants.DefaultRecipesXml

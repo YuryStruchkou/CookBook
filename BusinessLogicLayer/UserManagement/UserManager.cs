@@ -58,6 +58,11 @@ namespace BusinessLogicLayer.UserManagement
             return _xmlDataAccessUsers.Get(u => u.Username == username).FirstOrDefault();
         }
 
+        public Recipe GetRecipeByName(int userId, string name)
+        {
+            return _xmlDataAccessRecipes.Get(r => r.Name == name && userId == r.UserId).FirstOrDefault();
+        }
+
         public int GetUserCount()
         {
             return _xmlDataAccessUsers.GetAll().Count;

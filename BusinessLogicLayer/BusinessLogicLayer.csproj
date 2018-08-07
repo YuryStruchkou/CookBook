@@ -14,7 +14,6 @@
     <Folder Include="AccountManagement\" />
     <Folder Include="CommentManagement\" />
     <Folder Include="AdministrativeLogic\" />
-    <Folder Include="VoteManagement\" />
     <Folder Include="TagManagement\" />
     <Folder Include="SearchManagement\" />
   </ItemGroup>
