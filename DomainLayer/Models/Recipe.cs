@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataLayer.Models
+namespace DomainLayer.Models
 {
     public class Recipe
     {

@@ -1,52 +1,52 @@
 ﻿using DataLayer.ConsoleDataAccess;
-using DataLayer.Models;
 using System;
 using System.Collections.Generic;
+using DomainLayer.Models;
 
 namespace BusinessLogicLayer.RecipeManagement
 {
     public class RecipeManager
     {
-        private XmlDataAccessRecipes xmlDataAccess;
+        private readonly XmlDataAccessRecipes _xmlDataAccess;
 
         public RecipeManager()
         {
-            xmlDataAccess = new XmlDataAccessRecipes();
+            _xmlDataAccess = new XmlDataAccessRecipes();
         }
 
-        public RecipeManager(XmlDataAccessRecipes _xmlDataAccess)
+        public RecipeManager(XmlDataAccessRecipes xmlDataAccess)
         {
-            xmlDataAccess = _xmlDataAccess;
+            _xmlDataAccess = _xmlDataAccess;
         }
 
         public void AddRecipe(Recipe item)
         {
-            xmlDataAccess.Add(item);
+            _xmlDataAccess.Add(item);
         }
 
         public void UpdateRecipe(Recipe item, Func<Recipe, bool> predicate)
         {
-            xmlDataAccess.Update(item, predicate);
+            _xmlDataAccess.Update(item, predicate);
         }
 
         public void DeleteRecipe(Func<Recipe, bool> predicate)
         {
-            xmlDataAccess.Delete(predicate);
+            _xmlDataAccess.Delete(predicate);
         }
 
         public List<Recipe> Get(Func<Recipe, bool> predicate)
         {
-            return xmlDataAccess.Get(predicate);
+            return _xmlDataAccess.Get(predicate);
         }
 
         public List<Recipe> GetAll()
         {
-            return xmlDataAccess.GetAll();
+            return _xmlDataAccess.GetAll();
         }
 
         public int GetRecipeCount()
         {
-            return xmlDataAccess.GetAll().Count;
+            return _xmlDataAccess.GetAll().Count;
         }
     }
 }

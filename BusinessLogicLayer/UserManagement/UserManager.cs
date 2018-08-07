@@ -1,52 +1,52 @@
 ﻿using DataLayer.ConsoleDataAccess;
-using DataLayer.Models;
 using System;
 using System.Collections.Generic;
+using DomainLayer.Models;
 
 namespace BusinessLogicLayer.UserManagement
 {
     public class UserManager
     {
-        private XmlDataAccessUsers xmlDataAccess;
+        private readonly XmlDataAccessUsers _xmlDataAccess;
 
         public UserManager()
         {
-            xmlDataAccess = new XmlDataAccessUsers();
+            _xmlDataAccess = new XmlDataAccessUsers();
         }
 
-        public UserManager(XmlDataAccessUsers _xmlDataAccess)
+        public UserManager(XmlDataAccessUsers xmlDataAccess)
         {
-            xmlDataAccess = _xmlDataAccess;
+            _xmlDataAccess = xmlDataAccess;
         }
 
         public void AddUser(User item)
         {
-            xmlDataAccess.Add(item);
+            _xmlDataAccess.Add(item);
         }
 
         public void UpdateUser(User item, Func<User, bool> predicate)
         {
-            xmlDataAccess.Update(item, predicate);
+            _xmlDataAccess.Update(item, predicate);
         }
 
         public void DeleteUser(Func<User, bool> predicate)
         {
-            xmlDataAccess.Delete(predicate);
+            _xmlDataAccess.Delete(predicate);
         }
 
         public List<User> Get(Func<User, bool> predicate)
         {
-            return xmlDataAccess.Get(predicate);
+            return _xmlDataAccess.Get(predicate);
         }
 
         public List<User> GetAll()
         {
-            return xmlDataAccess.GetAll();
+            return _xmlDataAccess.GetAll();
         }
 
         public int GetUserCount()
         {
-            return xmlDataAccess.GetAll().Count;
+            return _xmlDataAccess.GetAll().Count;
         }
     }
 }

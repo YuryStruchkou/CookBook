@@ -1,14 +1,13 @@
-﻿using BusinessLogicLayer.RecipeManagement;
+﻿using System;
+using BusinessLogicLayer.RecipeManagement;
 using BusinessLogicLayer.UserManagement;
-using DataLayer.ConsoleDataAccess;
-using DataLayer.Models;
-using System;
+using DomainLayer.Models;
 
-namespace ConsoleApp
+namespace ConsolePresentationLayer
 {
     class ConsoleProgram
     {
-        static User User1 = new User
+        static readonly User User1 = new User
         {
             Id = "id1",
             Username = "user1",
@@ -25,7 +24,7 @@ namespace ConsoleApp
             }
         };
 
-        static User User2 = new User
+        static readonly User User2 = new User
         {
             Id = "id2",
             Username = "user2",
@@ -42,7 +41,7 @@ namespace ConsoleApp
             }
         };
 
-        static Recipe Recipe1 = new Recipe
+        static readonly Recipe Recipe1 = new Recipe
         {
             Id = "idRec1",
             Name = "Something",
@@ -55,7 +54,7 @@ namespace ConsoleApp
             UserId = "id1"
         };
 
-        static Recipe Recipe2 = new Recipe
+        static readonly Recipe Recipe2 = new Recipe
         {
             Id = "idRec2",
             Name = "SomethingElse",
@@ -68,7 +67,7 @@ namespace ConsoleApp
             UserId = "id1"
         };
 
-        static Recipe Recipe3 = new Recipe
+        static readonly Recipe Recipe3 = new Recipe
         {
             Id = "idRec3",
             Name = "SomethingElseElse",

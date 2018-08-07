@@ -1,14 +1,13 @@
-﻿using DataLayer.DataConstants;
-using DataLayer.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Xml.Linq;
+using DomainLayer.DataConstants;
+using DomainLayer.Models;
 
 namespace DataLayer.ConsoleDataAccess
 {
     public class XmlDataAccessRecipes : XmlDataAccess<Recipe>
     {
-        public XmlDataAccessRecipes() : base(XMLConstants.DEFAULT_RECIPES_XML, XMLConstants.RECIPES)
+        public XmlDataAccessRecipes() : base(XmlConstants.DefaultRecipesXml, XmlConstants.Recipes)
         {
         }
 
