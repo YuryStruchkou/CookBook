@@ -1,14 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using CoreProject.LoggingHelpers;
-using CoreProject.XmlHelpers;
 
-namespace CoreProject
+namespace CoreProject.Helpers
 {
     public static class XmlSerializationHelper<T>
     {
-        private static XmlSerializer serializer = new XmlSerializer(typeof(T));
+        private static readonly XmlSerializer Serializer = new XmlSerializer(typeof(T));
 
         public static void Serialize(string file, T obj)
         {
@@ -16,7 +14,7 @@ namespace CoreProject
             {
                 using (var fs = new FileStream(file, FileMode.Create))
                 {
-                    serializer.Serialize(fs, obj);
+                    Serializer.Serialize(fs, obj);
                 }
             }
             catch (Exception e)
@@ -34,7 +32,7 @@ namespace CoreProject
                 {
                     try
                     {
-                        return (T)serializer.Deserialize(fs);
+                        return (T)Serializer.Deserialize(fs);
                     }
                     catch (Exception e)
                     {

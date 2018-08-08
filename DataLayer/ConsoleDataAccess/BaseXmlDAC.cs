@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CoreProject.LoggingHelpers;
+using CoreProject.Helpers;
 using DomainLayer.XmlContext;
 
 namespace DataLayer.ConsoleDataAccess

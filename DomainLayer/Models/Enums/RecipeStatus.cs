@@ -1,4 +1,4 @@
-﻿namespace DomainLayer.Models
+﻿namespace DomainLayer.Models.Enums
 {
     public enum RecipeStatus
     {

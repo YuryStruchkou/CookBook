@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DataLayer.ConsoleDataAccess;
 using DomainLayer.Models;
+using DomainLayer.Models.Entities;
 
 namespace BusinessLogicLayer.VoteManagement
 {

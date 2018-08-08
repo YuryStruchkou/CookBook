@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DomainLayer.Models;
+using DomainLayer.Models.Entities;
 
 namespace DataLayer.ConsoleDataAccess
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoreProject.XmlHelpers
+namespace CoreProject.Helpers
 {
     public class SerializationException : Exception
     {

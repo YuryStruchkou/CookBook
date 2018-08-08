@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using CoreProject;
 using CoreProject.DataConstants;
-using CoreProject.LoggingHelpers;
-using CoreProject.XmlHelpers;
+using CoreProject.Helpers;
 using DomainLayer.Models;
+using DomainLayer.Models.Entities;
 
 namespace DomainLayer.XmlContext
 {

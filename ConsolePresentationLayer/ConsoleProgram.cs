@@ -3,6 +3,8 @@ using BusinessLogicLayer.RecipeManagement;
 using BusinessLogicLayer.UserManagement;
 using BusinessLogicLayer.VoteManagement;
 using DomainLayer.Models;
+using DomainLayer.Models.Entities;
+using DomainLayer.Models.Enums;
 
 namespace ConsolePresentationLayer
 {
