@@ -8,6 +8,9 @@
     <Reference Include="log4net">
       <HintPath>..\..\..\..\.nuget\packages\log4net\2.0.8\lib\netstandard1.3\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore\2.0.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

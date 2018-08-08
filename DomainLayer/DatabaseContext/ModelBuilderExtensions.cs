@@ -1,13 +1,11 @@
 ﻿using System;
-using BusinessLogicLayer.RecipeManagement;
-using BusinessLogicLayer.UserManagement;
-using BusinessLogicLayer.VoteManagement;
 using DomainLayer.Models.Entities;
 using DomainLayer.Models.Enums;
+using Microsoft.EntityFrameworkCore;
 
-namespace ConsolePresentationLayer
+namespace DomainLayer.DatabaseContext
 {
-    class ConsoleProgram
+    public static class ModelBuilderExtensions
     {
         static readonly User User1 = new User
         {
@@ -17,13 +15,6 @@ namespace ConsolePresentationLayer
             PasswordHash = "yfhrhr838319-sdkkie92-sdew2",
             CreationDate = new DateTime(2018, 8, 1),
             Role = Role.User,
-            UserProfile = new UserProfile
-            {
-                UserId = 1,
-                Avatar = "https://kek.com/kek.jpg",
-                IsMuted = false,
-                UserStatus = UserStatus.Active
-            }
         };
 
         static readonly User User2 = new User
@@ -34,13 +25,22 @@ namespace ConsolePresentationLayer
             PasswordHash = "yfhrhr838319-sdkkie92-sdew2",
             CreationDate = new DateTime(2018, 8, 1),
             Role = Role.Admin,
-            UserProfile = new UserProfile
-            {
-                UserId = 2,
-                Avatar = "https://kek.com/kek.jpg",
-                IsMuted = false,
-                UserStatus = UserStatus.Active
-            }
+        };
+
+        private static readonly UserProfile UserProfile1 = new UserProfile
+        {
+            UserId = 1,
+            Avatar = "https://kek.com/kek.jpg",
+            IsMuted = false,
+            UserStatus = UserStatus.Active
+        };
+
+        private static readonly UserProfile UserProfile2 = new UserProfile
+        {
+            UserId = 2,
+            Avatar = "https://kek.com/kek.jpg",
+            IsMuted = false,
+            UserStatus = UserStatus.Active
         };
 
         static readonly Recipe Recipe1 = new Recipe
@@ -84,6 +84,7 @@ namespace ConsolePresentationLayer
 
         private static readonly Vote Vote1 = new Vote
         {
+            Id = 1,
             RecipeId = 1,
             UserId = 1,
             Value = 5
@@ -91,52 +92,37 @@ namespace ConsolePresentationLayer
 
         private static readonly Vote Vote2 = new Vote
         {
+            Id = 2,
             RecipeId = 1,
             UserId = 2,
             Value = 2
         };
 
-        static void Main(string[] args)
+        public static void Seed(this ModelBuilder modelBuilder)
         {
-            var userManager = new UserManager();
-            var recipeManager = new RecipeManager();
-            var voteManager = new VoteManager();
+            modelBuilder.Entity<User>()
+                .HasData(User1);
+           
 
-            userManager.AddUser(User1);
-            userManager.AddUser(User2);
-            recipeManager.AddRecipe(Recipe1);
-            recipeManager.AddRecipe(Recipe2);
-            recipeManager.AddRecipe(Recipe3);
-            voteManager.AddVote(Vote1);
-            voteManager.AddVote(Vote2);
+            modelBuilder.Entity<User>()
+                .HasData(User2);
 
-            User user;
-            Recipe recipe;
-            while (true)
-            {
-                Console.WriteLine("Enter user name: ");
-                var username = Console.ReadLine();
-                user = userManager.GetUserByUsername(username);
-                if (user == null)
-                    Console.WriteLine("No such user was found.");
-                else
-                    break;
-            }
-            while (true)
-            {
-                Console.WriteLine("Enter recipe name: ");
-                var recipeName = Console.ReadLine();
-                recipe = userManager.GetRecipeByName(user.Id, recipeName);
-                if (recipe == null)
-                    Console.WriteLine("No such recipe was found.");
-                else
-                    break;
-            }
-            Console.WriteLine($"Average grade is {recipeManager.GetAverageVote(recipe.Id)}");
+            modelBuilder.Entity<UserProfile>()
+                .HasData(UserProfile1);
 
-            userManager.DeleteUser(u => true);
-            recipeManager.DeleteRecipe(r => true);
-            voteManager.DeleteVote(v => true);
-        }
+            modelBuilder.Entity<UserProfile>()
+                .HasData(UserProfile2);
+
+            modelBuilder.Entity<Recipe>()
+            .HasData(Recipe1);
+            modelBuilder.Entity<Recipe>()
+            .HasData(Recipe2);
+            modelBuilder.Entity<Recipe>()
+            .HasData(Recipe3);
+            modelBuilder.Entity<Vote>()
+            .HasData(Vote1);
+            modelBuilder.Entity<Vote>()
+            .HasData(Vote2);
+}
     }
 }

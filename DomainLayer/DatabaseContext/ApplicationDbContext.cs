@@ -2,7 +2,7 @@
 using DomainLayer.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DomainLayer.Models.DatabaseContext
+namespace DomainLayer.DatabaseContext
 {
     public class ApplicationDbContext : DbContext
     {
@@ -47,6 +47,8 @@ namespace DomainLayer.Models.DatabaseContext
                 .HasIndex(u => u.Email);
             modelBuilder.Entity<Tag>()
                 .HasIndex(t => t.Content);
+            modelBuilder.Seed();
+            
         }
     }
 }
