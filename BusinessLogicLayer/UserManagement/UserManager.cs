@@ -8,16 +8,16 @@ namespace BusinessLogicLayer.UserManagement
 {
     public class UserManager
     {
-        private readonly IXmlDataAccess<User> _xmlDataAccessUsers;
-        private readonly IXmlDataAccess<Recipe> _xmlDataAccessRecipes;
+        private readonly IXmlDAC<User> _xmlDataAccessUsers;
+        private readonly IXmlDAC<Recipe> _xmlDataAccessRecipes;
 
         public UserManager()
         {
-            _xmlDataAccessRecipes = new XmlDataAccessRecipes();
-            _xmlDataAccessUsers = new XmlDataAccessUsers();
+            _xmlDataAccessRecipes = new XmlRecipeDAC();
+            _xmlDataAccessUsers = new XmlUsersDAC();
         }
 
-        public UserManager(IXmlDataAccess<User> xmlDataAccessUsers, IXmlDataAccess<Recipe> xmlDataAccessRecipes)
+        public UserManager(IXmlDAC<User> xmlDataAccessUsers, IXmlDAC<Recipe> xmlDataAccessRecipes)
         {
             _xmlDataAccessUsers = xmlDataAccessUsers;
             _xmlDataAccessRecipes = xmlDataAccessRecipes;

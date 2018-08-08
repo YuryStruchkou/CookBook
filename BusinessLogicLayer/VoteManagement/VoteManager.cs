@@ -7,14 +7,14 @@ namespace BusinessLogicLayer.VoteManagement
 {
     public class VoteManager
     {
-        private readonly IXmlDataAccess<Vote> _xmlDataAccessVotes;
+        private readonly IXmlDAC<Vote> _xmlDataAccessVotes;
 
         public VoteManager()
         {
-            _xmlDataAccessVotes = new XmlDataAccessVotes();
+            _xmlDataAccessVotes = new XmlVotesDAC();
         }
 
-        public VoteManager(IXmlDataAccess<Vote> xmlDataAccessVotes)
+        public VoteManager(IXmlDAC<Vote> xmlDataAccessVotes)
         {
             _xmlDataAccessVotes = xmlDataAccessVotes;
         }

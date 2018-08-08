@@ -3,7 +3,7 @@ using DomainLayer.Models;
 
 namespace DataLayer.ConsoleDataAccess
 {
-    public class XmlDataAccessComments : BaseXmlDataAccess<Comment>
+    public class XmlCommentDAC : BaseXmlDAC<Comment>
     {
         protected override List<Comment> XmlList => XmlContext.Comments;
     }

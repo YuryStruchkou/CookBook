@@ -8,17 +8,17 @@ namespace BusinessLogicLayer.RecipeManagement
 {
     public class RecipeManager
     {
-        private readonly IXmlDataAccess<Recipe> _xmlDataAccessRecipes;
+        private readonly IXmlDAC<Recipe> _xmlDataAccessRecipes;
 
-        private readonly IXmlDataAccess<Vote> _xmlDataAccessVotes;
+        private readonly IXmlDAC<Vote> _xmlDataAccessVotes;
 
         public RecipeManager()
         {
-            _xmlDataAccessVotes = new XmlDataAccessVotes();
-            _xmlDataAccessRecipes = new XmlDataAccessRecipes();
+            _xmlDataAccessVotes = new XmlVotesDAC();
+            _xmlDataAccessRecipes = new XmlRecipeDAC();
         }
 
-        public RecipeManager(IXmlDataAccess<Recipe> xmlDataAccessRecipes, IXmlDataAccess<Vote> xmlDataAccessVotes)
+        public RecipeManager(IXmlDAC<Recipe> xmlDataAccessRecipes, IXmlDAC<Vote> xmlDataAccessVotes)
         {
             _xmlDataAccessRecipes = xmlDataAccessRecipes;
             _xmlDataAccessVotes = xmlDataAccessVotes;

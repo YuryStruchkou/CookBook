@@ -6,7 +6,7 @@ using DomainLayer.XmlContext;
 
 namespace DataLayer.ConsoleDataAccess
 {
-    public abstract class BaseXmlDataAccess<T> : IXmlDataAccess<T>
+    public abstract class BaseXmlDAC<T> : IXmlDAC<T>
     {
         protected XmlContext XmlContext = XmlContext.GetInstance();
 

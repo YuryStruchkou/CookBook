@@ -3,7 +3,7 @@ using DomainLayer.Models;
 
 namespace DataLayer.ConsoleDataAccess
 {
-    public class XmlDataAccessUsers : BaseXmlDataAccess<User>
+    public class XmlUsersDAC : BaseXmlDAC<User>
     {
         protected override List<User> XmlList => XmlContext.Users;
     }

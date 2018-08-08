@@ -3,7 +3,7 @@ using DomainLayer.Models;
 
 namespace DataLayer.ConsoleDataAccess
 {
-    public class XmlDataAccessRecipeTags : BaseXmlDataAccess<RecipeTag>
+    public class XmlRecipeTagsDAC : BaseXmlDAC<RecipeTag>
     {
         protected override List<RecipeTag> XmlList => XmlContext.RecipeTags;
     }
