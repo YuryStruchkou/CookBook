@@ -18,9 +18,8 @@ namespace DomainLayer.Models.Entities
 
         public DateTime? EditDate { get; set; }
 
-        [Required]
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         [Required]
         [ForeignKey("Recipe")]

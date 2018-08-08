@@ -5,13 +5,11 @@ namespace DomainLayer.Models.Entities
 {
     public class RecipeTag
     {
-        [Key]
         [ForeignKey(nameof(Recipe))]
         public int RecipeId { get; set; }
 
-        [Key]
         [ForeignKey(nameof(Tag))]
-        public string TagContent { get; set; }
+        public int TagId { get; set; }
 
         public virtual Recipe Recipe { get; set; }
 

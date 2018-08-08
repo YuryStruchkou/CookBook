@@ -31,9 +31,8 @@ namespace DomainLayer.Models.Entities
         [Required]
         public RecipeStatus RecipeStatus { get; set; }
 
-        [Required]
         [ForeignKey(nameof(User))]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         
         public virtual UserProfile User { get; set; }
 

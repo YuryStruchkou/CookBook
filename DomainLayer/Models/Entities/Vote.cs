@@ -6,12 +6,13 @@ namespace DomainLayer.Models.Entities
     public class Vote
     {
         [Key]
-        [ForeignKey(nameof(User))]
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
-        [Key]
+        [ForeignKey(nameof(User))]
+        public int? UserId { get; set; }
+
         [ForeignKey(nameof(Recipe))]
-        public int RecipeId { get; set; }
+        public int? RecipeId { get; set; }
 
         [Required]
         public int Value { get; set; }
