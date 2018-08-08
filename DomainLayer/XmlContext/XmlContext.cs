@@ -27,12 +27,12 @@ namespace DomainLayer.XmlContext
         {
             try
             {
-                Users = XmlSerializationHelper<List<User>>.Deserialize(XmlConstants.DefaultUsersXml) ?? new List<User>();
-                Recipes = XmlSerializationHelper<List<Recipe>>.Deserialize(XmlConstants.DefaultRecipesXml) ?? new List<Recipe>();
-                Votes = XmlSerializationHelper<List<Vote>>.Deserialize(XmlConstants.DefaultVotesXml) ?? new List<Vote>();
-                Comments = XmlSerializationHelper<List<Comment>>.Deserialize(XmlConstants.DefaultCommentsXml) ?? new List<Comment>();
-                RecipeTags = XmlSerializationHelper<List<RecipeTag>>.Deserialize(XmlConstants.DefaultRecipeTagsXml) ?? new List<RecipeTag>();
-                Tags = XmlSerializationHelper<List<Tag>>.Deserialize(XmlConstants.DefaultTagsXml) ?? new List<Tag>();
+                Users = XmlSerializationHelper<List<User>>.Deserialize(PathConstants.DefaultUsersXml) ?? new List<User>();
+                Recipes = XmlSerializationHelper<List<Recipe>>.Deserialize(PathConstants.DefaultRecipesXml) ?? new List<Recipe>();
+                Votes = XmlSerializationHelper<List<Vote>>.Deserialize(PathConstants.DefaultVotesXml) ?? new List<Vote>();
+                Comments = XmlSerializationHelper<List<Comment>>.Deserialize(PathConstants.DefaultCommentsXml) ?? new List<Comment>();
+                RecipeTags = XmlSerializationHelper<List<RecipeTag>>.Deserialize(PathConstants.DefaultRecipeTagsXml) ?? new List<RecipeTag>();
+                Tags = XmlSerializationHelper<List<Tag>>.Deserialize(PathConstants.DefaultTagsXml) ?? new List<Tag>();
             }
             catch (SerializationException e)
             {
@@ -52,12 +52,12 @@ namespace DomainLayer.XmlContext
         {
             try
             {
-                XmlSerializationHelper<List<User>>.Serialize(XmlConstants.DefaultUsersXml, Users);
-                XmlSerializationHelper<List<Recipe>>.Serialize(XmlConstants.DefaultRecipesXml, Recipes);
-                XmlSerializationHelper<List<Vote>>.Serialize(XmlConstants.DefaultVotesXml, Votes);
-                XmlSerializationHelper<List<Comment>>.Serialize(XmlConstants.DefaultCommentsXml, Comments);
-                XmlSerializationHelper<List<Tag>>.Serialize(XmlConstants.DefaultTagsXml, Tags);
-                XmlSerializationHelper<List<RecipeTag>>.Serialize(XmlConstants.DefaultRecipeTagsXml, RecipeTags);
+                XmlSerializationHelper<List<User>>.Serialize(PathConstants.DefaultUsersXml, Users);
+                XmlSerializationHelper<List<Recipe>>.Serialize(PathConstants.DefaultRecipesXml, Recipes);
+                XmlSerializationHelper<List<Vote>>.Serialize(PathConstants.DefaultVotesXml, Votes);
+                XmlSerializationHelper<List<Comment>>.Serialize(PathConstants.DefaultCommentsXml, Comments);
+                XmlSerializationHelper<List<Tag>>.Serialize(PathConstants.DefaultTagsXml, Tags);
+                XmlSerializationHelper<List<RecipeTag>>.Serialize(PathConstants.DefaultRecipeTagsXml, RecipeTags);
             }
             catch (SerializationException e)
             {
