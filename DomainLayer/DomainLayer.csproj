@@ -11,6 +11,7 @@
     <Compile Remove="Migrations\20180808105318_InitialCreate.cs" />
     <Compile Remove="Migrations\20180808105757_InitialCreate.cs" />
     <Compile Remove="Migrations\20180808105855_InitialCreate.cs" />
+    <Compile Remove="Migrations\20180808111452_UniqueConstraints.cs" />
   </ItemGroup>
 
   <ItemGroup>

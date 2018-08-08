@@ -35,6 +35,18 @@ namespace DomainLayer.Models.DatabaseContext
                 .HasOne(r => r.User)
                 .WithMany(u => u.Recipes)
                 .OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<User>()
+                .HasAlternateKey(u => u.Username);
+            modelBuilder.Entity<User>()
+                .HasAlternateKey(u => u.Email);
+            modelBuilder.Entity<Tag>()
+                .HasAlternateKey(t => t.Content);
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Username);
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email);
+            modelBuilder.Entity<Tag>()
+                .HasIndex(t => t.Content);
         }
     }
 }
